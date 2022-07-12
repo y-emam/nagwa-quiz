@@ -1,0 +1,48 @@
+.Practice {
+  background: #78b517;
+  background: linear-gradient(
+    90deg,
+    #a5f593 -20%,
+    #207cca 34%,
+    #3a7577 67%,
+    #054896 120%
+  );
+  width: 100%;
+  height: 400px;
+}
+
+.Practice h1 {
+  color: #fff;
+  padding-top: 30px;
+  padding-bottom: 110px;
+  font-size: 46px;
+}
+
+.Practice .btn-row {
+  display: flex;
+  margin: 16px;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.Practice button {
+  width: 25%;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #207cca;
+  cursor: pointer;
+  border-radius: 3px;
+  border: none;
+  height: 50px;
+  box-shadow: 4px 3px 6px rgba(0, 0, 0);
+  transition: all 0.2s ease-out;
+}
+
+.Practice button:hover {
+  box-shadow: 0 0 0px rgba(0, 0, 0);
+  background-color: #ddd;
+  color: #207cca;
+  border-radius: 8px;
+  border: 4px solid #207cca;
+}

@@ -1,0 +1,51 @@
+.Instructions {
+  background: #78b517;
+  background: linear-gradient(
+    90deg,
+    #a5f593 -20%,
+    #207cca 34%,
+    #3a7577 67%,
+    #054896 120%
+  );
+  width: 100%;
+  height: 400px;
+}
+
+.Instructions .title {
+  color: #fff;
+  font-size: 36px;
+  position: absolute;
+  left: 10%;
+}
+
+.Instructions .paragraph {
+  color: #fff;
+  font-size: 24px;
+  position: absolute;
+  left: 10%;
+  top: 30%;
+  text-align: start;
+}
+
+.Instructions .btn {
+  position: absolute;
+  top: 420px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #111;
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  /* box-shadow: 1px 1px 5px blue; */
+  cursor: pointer;
+  background-color: #a5f593;
+  transform: translate(-50px);
+  transition: all 0.2s ease-out;
+}
+
+.Instructions .btn:hover {
+  background-color: white;
+  color: #2ca511;
+  border: 3px solid #2ca511;
+}
