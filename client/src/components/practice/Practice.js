@@ -9,8 +9,8 @@ class Practice extends React.Component {
       })
       .then((res) => {
         if (res.data) {
-          // this.state.words.push(res.data[0]);
-          this.setState({ words: res.data[0] });
+          this.setState({ words: res.data });
+          // console.log(res.data);
         } else {
           throw new Error("Failed to get data from API");
         }
@@ -27,13 +27,19 @@ class Practice extends React.Component {
       words: [],
       score: 0,
       counter: 0,
+      word: "",
     };
 
     this.getWords();
   }
 
-  getWord() {
-    console.log(this.state.words);
+  componentDidMount() {
+    let word = this.state.words[0].word;
+    this.setState({ word: word });
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.getWords);
   }
 
   answer(ans) {}
@@ -41,7 +47,7 @@ class Practice extends React.Component {
   render() {
     return (
       <div className="Practice">
-        <h1 className="word">{this.state.words[0].word}</h1>
+        <h1 className="word">{this.state.word}</h1>
 
         <div className="btn-row">
           <button
