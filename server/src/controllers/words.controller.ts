@@ -1,6 +1,45 @@
 import { Request, Response } from "express";
 import jsonData from "../TestData.json";
 
+type word = {
+  id: number;
+  word: string;
+  pos: string;
+};
+
+const checkList = (
+  noun: number,
+  verb: number,
+  adj: number,
+  adv: number,
+  wordList: word[],
+  data: word[]
+) => {
+  let temp = "";
+  if (noun > 2) {
+    temp = "noun";
+  } else if (verb > 2) {
+    temp = "verb";
+  } else if (adj > 2) {
+    temp = "adjective";
+  } else if (adv > 2) {
+    temp = "adverb";
+  }
+
+  for (let i = 0; i < wordList.length; i++) {
+    if (wordList[i].pos === temp) {
+      wordList.splice(i, 1);
+      break;
+    }
+  }
+
+  for (let i = 10; i < data.length; i++) {
+    if (data[i].pos === "adverb") {
+      wordList.push(data[i]);
+    }
+  }
+};
+
 const wordsController = async (req: Request, res: Response) => {
   try {
     const data = jsonData.wordList;
@@ -48,8 +87,15 @@ const wordsController = async (req: Request, res: Response) => {
     }
 
     // // check that words have at leaset one noun, one verb, one adjective, and one adverb
-    // if (adv === 0) {
-    // }
+    if (adv === 0) {
+      checkList(noun, verb, adj, adv, wordList, data);
+    } else if (adj == 0) {
+      checkList(noun, verb, adj, adv, wordList, data);
+    } else if (verb == 0) {
+      checkList(noun, verb, adj, adv, wordList, data);
+    } else if (noun == 0) {
+      checkList(noun, verb, adj, adv, wordList, data);
+    }
 
     // send the data to the user
     res.json({
