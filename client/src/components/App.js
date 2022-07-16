@@ -15,7 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Instructions />} />
           <Route path="/practice" element={<Practice />} />
-          <Route path="/rank" element={<Rank />} />
+          <Route path="/rank/:score" element={<Rank />} />
         </Routes>
       </Router>
     </div>

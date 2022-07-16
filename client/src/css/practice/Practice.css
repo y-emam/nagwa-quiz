@@ -39,32 +39,43 @@
   transition: all 0.2s ease-out;
 }
 
-.Practice button:hover {
+.Practice button:hover,
+.Practice .selected {
   box-shadow: 0 0 0px rgba(0, 0, 0);
   background-color: #ddd;
-  color: #207cca;
+  color: #195d98;
   border-radius: 8px;
   border: 4px solid #207cca;
 }
 
-footer {
+.Practice footer {
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
 
-.question-no {
+.Practice .question-no {
   color: #000000;
   font-size: 40px;
   font-weight: bold;
 }
 
-.next {
+.Practice footer button {
   width: 100px;
   height: 40px;
 }
 
-.disabled {
-  background-color: grey;
-  color: black;
+.Practice footer .disabled {
+  box-shadow: 0 0 0px rgba(0, 0, 0);
+  background-color: rgb(86, 86, 86);
+  color: white;
+  cursor: not-allowed;
+  transition: all 0.2s ease-out;
+}
+
+.Practice footer .disabled:hover {
+  background-color: rgb(86, 86, 86);
+  color: white;
+  border: none;
+  border-radius: 0;
 }

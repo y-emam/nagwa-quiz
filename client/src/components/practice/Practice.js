@@ -1,117 +1,115 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import "../../css/practice/Practice.css";
-
-const answer = (ans, setWord, data, counter, setCounter) => {
-  // show which answer is right
-  // change the rank
-  // activate next button
-  // do th function of next button
-  // affect progress bar
-};
-
-const nextWord = (counter, setCounter, data, setWord) => {
-  // change word
-  console.log(data[counter].word);
-  setWord(data[counter].word);
-
-  // change the cards
-
-  // set counter
-  setCounter(counter + 1);
-};
+import FetchWords from "../data/FetchWords";
+import { useNavigate } from "react-router-dom";
 
 function Practice() {
-  let [word, setWord] = useState("...");
   let [counter, setCounter] = useState(0);
-  let [data, setData] = useState([]);
+  let { data, isPending, error } = FetchWords();
+  let [ans, setAns] = useState(null);
   let [rank, setRank] = useState(0);
+  const navigate = useNavigate();
 
-  let [nextBtn, setNextBtn] = useState(<button id="next">Next</button>);
+  const handleNext = async () => {
+    // check if the answer is right or no and show the answer to the user
+    const userAns = ans === data[counter].pos ? true : false;
 
-  // console.log(data);
+    // change the rank
+    if (userAns) {
+      setRank(rank + 10);
+
+      // alert("Right answer.");
+    }
+
+    // show the answer to the user
+
+    // change the word
+    setCounter(counter + 1);
+
+    // disable all buttons and next button
+    setAns(null);
+  };
+
+  const selectAns = (wordType) => {
+    setAns(wordType);
+  };
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/words")
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.data) {
-          // setWord(res.data[0].word);
-          setData(res.data);
-          setNextBtn(
-            <button
-              className="next disabled"
-              disabled="disabled"
-              onClick={() => {
-                nextWord(counter, setCounter, data, setWord);
-              }}
-            >
-              Next
+    console.log(rank);
+
+    // affect progress bar
+
+    // go to the rank page if the words reaches 10
+    if (counter >= 10) {
+      navigate("/rank/" + rank);
+    }
+  }, [rank, counter]);
+
+  if (!error) {
+    return (
+      <div className="Practice">
+        {isPending && <h1 className="word">...</h1>}
+        {data && <h1 className="word">{data[counter].word}</h1>}
+
+        <div className="btn-row">
+          <button
+            className={ans === "noun" ? "selected" : "not-selected"}
+            onClick={() => {
+              selectAns("noun");
+            }}
+          >
+            Noun
+          </button>
+          <button
+            className={ans === "verb" ? "selected" : "not-selected"}
+            onClick={() => {
+              selectAns("verb");
+            }}
+          >
+            Verb
+          </button>
+        </div>
+
+        <div className="btn-row">
+          <button
+            className={ans === "adjective" ? "selected" : "not-selected"}
+            onClick={() => {
+              selectAns("adjective");
+            }}
+          >
+            Adjective
+          </button>
+          <button
+            className={ans === "adverb" ? "selected" : "not-selected"}
+            onClick={() => {
+              selectAns("adverb");
+            }}
+          >
+            Adverb
+          </button>
+        </div>
+
+        <footer>
+          <p className="question-no">{counter + 1} / 10</p>
+          {!ans && (
+            <button className="disabled" onClick={handleNext}>
+              Submit
             </button>
-          );
-          // if first word add it to the page
-          if (counter === 0) {
-            nextWord(counter, setCounter, data, setWord);
-          }
-        } else {
-          setData([]);
-          throw new Error("Failed to get data from API");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
+          )}
+          {ans && (
+            <button className="enabled" onClick={handleNext}>
+              Submit
+            </button>
+          )}
+        </footer>
 
-  return (
-    <div className="Practice">
-      <h1 className="word">{word}</h1>
-
-      <div className="btn-row">
-        <button
-          id="btn-noun"
-          onClick={() => {
-            answer("noun", setWord);
-          }}
-        >
-          Noun
-        </button>
-        <button
-          id="btn-verb"
-          onClick={() => {
-            answer("verb", setWord);
-          }}
-        >
-          Verb
-        </button>
+        {/* Progress Bar */}
       </div>
-
-      <div className="btn-row">
-        <button
-          id="btn-adj"
-          onClick={() => {
-            answer("adj", setWord);
-          }}
-        >
-          Adjective
-        </button>
-        <button
-          id="btn-adv"
-          onClick={() => {
-            answer("adv", setWord);
-          }}
-        >
-          Adverb
-        </button>
-      </div>
-
-      <footer>
-        <p className="question-no">{counter} / 10</p>
-        {nextBtn}
-      </footer>
-
-      {/* Progress Bar */}
-    </div>
-  );
+    );
+  } else {
+    return <h2>{`Error while trying to load data: ${error}`}</h2>;
+  }
 }
 
 export default Practice;
