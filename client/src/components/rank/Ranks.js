@@ -14,7 +14,7 @@ const Rank = () => {
 
         <div className="score-details">
           <h2>Score in the Exam</h2>
-          <p>{score}</p>
+          <p>{`${score} / 100`}</p>
         </div>
         <div className="rank-details">
           <h2>Rank among students</h2>

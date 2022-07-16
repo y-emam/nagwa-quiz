@@ -37,10 +37,7 @@ function Practice() {
     // affect progress bar
     let progressBar = document.getElementById("progress-bar");
 
-    // console.log(progressBar.clientWidth);
-
     let width = (rank / 100) * progressBar.offsetWidth;
-    console.log(width);
 
     progressBar.style.boxShadow = `inset ${width}px 0 0 0 rgb(0, 177, 15), 2px 2px 6px rgba(0, 0, 0)`;
 
@@ -54,7 +51,9 @@ function Practice() {
     return (
       <div className="Practice">
         {isPending && <h1 className="word">...</h1>}
-        {data && <h1 className="word">{data[counter].word}</h1>}
+        {data && data[counter] && (
+          <h1 className="word">{data[counter].word}</h1>
+        )}
 
         <div className="btn-row">
           <button
