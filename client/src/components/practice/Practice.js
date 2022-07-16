@@ -18,6 +18,8 @@ function Practice() {
     // change the rank
     if (userAns) {
       setRank(rank + 10);
+    } else {
+      alert("The correct answer is " + data[counter].pos);
     }
 
     // show the answer to the user
