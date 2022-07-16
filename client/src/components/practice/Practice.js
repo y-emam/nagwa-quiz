@@ -18,8 +18,6 @@ function Practice() {
     // change the rank
     if (userAns) {
       setRank(rank + 10);
-
-      // alert("Right answer.");
     }
 
     // show the answer to the user
@@ -36,9 +34,15 @@ function Practice() {
   };
 
   useEffect(() => {
-    console.log(rank);
-
     // affect progress bar
+    let progressBar = document.getElementById("progress-bar");
+
+    // console.log(progressBar.clientWidth);
+
+    let width = (rank / 100) * progressBar.offsetWidth;
+    console.log(width);
+
+    progressBar.style.boxShadow = `inset ${width}px 0 0 0 rgb(0, 177, 15), 2px 2px 6px rgba(0, 0, 0)`;
 
     // go to the rank page if the words reaches 10
     if (counter >= 10) {
@@ -91,7 +95,9 @@ function Practice() {
         </div>
 
         <footer>
-          <p className="question-no">{counter + 1} / 10</p>
+          <p className="question-no">{`Correct Answers: ${
+            rank / 10
+          } /${counter}`}</p>
           {!ans && (
             <button className="disabled" onClick={handleNext}>
               Submit
@@ -104,7 +110,7 @@ function Practice() {
           )}
         </footer>
 
-        {/* Progress Bar */}
+        <div className="progress-bar" id="progress-bar"></div>
       </div>
     );
   } else {
