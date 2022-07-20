@@ -1,4 +1,6 @@
 # Nagwa Interview Project
+A project that I built for an Interview for Nagwa Company.
+
 ### Client Side
 - It runs on port 3000
 - IT has 3 main endpoints: 
