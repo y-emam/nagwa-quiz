@@ -19,7 +19,7 @@ const Rank = () => {
         <div className="rank-details">
           <h2>Rank among students</h2>
           {isPending && <p>...</p>}
-          {rank && <p>{rank + "%"}</p>}
+          {rank && <p>{rank}</p>}
         </div>
       </div>
     );

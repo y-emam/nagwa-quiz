@@ -5,21 +5,21 @@ const rankController = async (req: Request, res: Response) => {
   try {
     const rankData = jsonData.scoresList;
     const finalScore = req.body.score;
-    let rank = 0;
+    let rank = 1;
 
     // get rank%
     rankData.forEach((score, i) => {
-      if (score < finalScore) {
+      if (finalScore < score) {
         rank++;
       }
     });
 
     // modify rank;
-    rank /= 0.3;
+    // rank /= 0.3;
 
     res.json({
       staus: "success",
-      data: Math.round(rank * 100) / 100,
+      data: rank,
     });
   } catch (error) {
     console.log(`Error while trying to get rank data: ${error}`);
