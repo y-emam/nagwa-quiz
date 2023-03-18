@@ -6,7 +6,7 @@ const FetchWords = () => {
   let [data, setData] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/words")
+    fetch("https://capable-pithivier-ac7f7e.netlify.app/api/words")
       .then((res) => res.json())
       .then((res) => {
         if (res) {

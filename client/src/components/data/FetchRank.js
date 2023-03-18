@@ -9,7 +9,7 @@ const FetchWords = (score) => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/rank", {
+    fetch("https://capable-pithivier-ac7f7e.netlify.app/api/rank", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
