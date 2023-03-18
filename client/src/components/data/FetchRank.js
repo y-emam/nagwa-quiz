@@ -26,7 +26,7 @@ const FetchWords = (score) => {
       .catch((err) => {
         setError(err.message);
       });
-  }, []);
+  }, [body]);
 
   return { data, isPending, error };
 };
