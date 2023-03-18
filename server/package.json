@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon stc/server.ts",
     "nodemon": "npm run build && nodemon src/server.ts",
     "build": "npx tsc",
     "test": "npm run build && jasmine"
