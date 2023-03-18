@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-require("dotenv").config();
+// require("dotenv").config();
 
 const FetchWords = () => {
   let [error, setError] = useState(null);
