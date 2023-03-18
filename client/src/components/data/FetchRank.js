@@ -5,6 +5,7 @@ const FetchWords = (score) => {
   let [error, setError] = useState(null);
   let [isPending, setIsPending] = useState(true);
   let [data, setData] = useState(null);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const body = {
     score: score,
   };
