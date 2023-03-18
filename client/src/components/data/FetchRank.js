@@ -9,7 +9,7 @@ const FetchWords = (score) => {
     score: score,
   };
 
-  const server_url = process.env.SERVER_URL !== "http://localhost:5000";
+  const server_url = "https://nagwa-exams.onrender.com/";
 
   useEffect(() => {
     fetch(server_url + "/api/rank", {
