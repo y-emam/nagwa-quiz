@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "nodemon src/server.ts",
     "nodemon": "npm run build && nodemon src/server.ts",
-    "build": "npx tsc && netlify deploy --prod",
-    "test": "npm run build && jasmine"
+    "build": "npx tsc",
+    "test": "npm run build && jasmine",
+    "start": "npm run build && node build/index.js"
   },
   "keywords": [],
   "author": "",
