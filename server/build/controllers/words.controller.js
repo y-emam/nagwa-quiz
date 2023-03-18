@@ -13,65 +13,85 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const TestData_json_1 = __importDefault(require("../TestData.json"));
+const checkList = (noun, verb, adj, adv, wordList, data) => {
+    let temp = "";
+    if (noun > 2) {
+        temp = "noun";
+    }
+    else if (verb > 2) {
+        temp = "verb";
+    }
+    else if (adj > 2) {
+        temp = "adjective";
+    }
+    else if (adv > 2) {
+        temp = "adverb";
+    }
+    for (let i = 0; i < wordList.length; i++) {
+        if (wordList[i].pos === temp) {
+            wordList.splice(i, 1);
+            break;
+        }
+    }
+    for (let i = 10; i < data.length; i++) {
+        if (data[i].pos === "adverb") {
+            wordList.push(data[i]);
+        }
+    }
+};
 const wordsController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        // const data = jsonData.wordList;
-        // let wordList = [];
-        // wordList = data;
-        // let adverb = 2,
-        //   noun = 5,
-        //   verb = 4,
-        //   adj = 4;
-        // let counter = 5;
-        // while (counter > 0) {
-        //   let word = wordList[Math.floor(Math.random() * wordList.length)];
-        //   // check for the type
-        //   switch (word.pos) {
-        //     case "adverb":
-        //       if (adverb) {
-        //         // remove element
-        //         wordList.splice(word.id, 1);
-        //         adverb--;
-        //         counter--;
-        //       }
-        //       break;
-        //     case "noun":
-        //       if (noun) {
-        //         // remove element
-        //         wordList.splice(word.id, 1);
-        //         noun--;
-        //         counter--;
-        //       }
-        //       break;
-        //     case "verb":
-        //       if (verb) {
-        //         // remove element
-        //         wordList.splice(word.id, 1);
-        //         verb--;
-        //         counter--;
-        //       }
-        //       break;
-        //     case "adjective":
-        //       if (adj) {
-        //         // remove element
-        //         wordList.splice(word.id, 1);
-        //         adj--;
-        //         counter--;
-        //       }
-        //       break;
-        //     default:
-        //       break;
-        //   }
-        // }
         const data = TestData_json_1.default.wordList;
         let wordList = [];
         let noun = 0, verb = 0, adj = 0, adv = 0;
-        while (wordList.length < 10) {
-            break;
+        let currentIndex = data.length;
+        let randomIndex;
+        // suffle the list
+        while (currentIndex != 0) {
+            // Pick a remaining element.
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            // And swap it with the current element.
+            [data[currentIndex], data[randomIndex]] = [
+                data[randomIndex],
+                data[currentIndex],
+            ];
         }
+        // take the first 10 elements
+        for (let i = 0; i < 10; i++) {
+            wordList[i] = data[i];
+            switch (wordList[i].pos) {
+                case "noun":
+                    noun++;
+                    break;
+                case "verb":
+                    verb++;
+                    break;
+                case "adverb":
+                    adv++;
+                    break;
+                case "adjective":
+                    adj++;
+                    break;
+            }
+        }
+        // // check that words have at leaset one noun, one verb, one adjective, and one adverb
+        if (adv === 0) {
+            checkList(noun, verb, adj, adv, wordList, data);
+        }
+        else if (adj == 0) {
+            checkList(noun, verb, adj, adv, wordList, data);
+        }
+        else if (verb == 0) {
+            checkList(noun, verb, adj, adv, wordList, data);
+        }
+        else if (noun == 0) {
+            checkList(noun, verb, adj, adv, wordList, data);
+        }
+        // send the data to the user
         res.json({
             status: "success",
-            data: data,
+            data: wordList,
         });
     }
     catch (error) {
