@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
+require("dotenv").config();
 
 const FetchWords = () => {
   let [error, setError] = useState(null);
   let [isPending, setIsPending] = useState(true);
   let [data, setData] = useState(null);
 
+  const server_url = process.env.SERVER_URL !== "http://localhost:5000";
+
   useEffect(() => {
-    fetch("https://capable-pithivier-ac7f7e.netlify.app/api/words")
+    fetch(server_url + "api/words")
       .then((res) => res.json())
       .then((res) => {
         if (res) {

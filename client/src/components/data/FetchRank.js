@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+require("dotenv").config();
 
 const FetchWords = (score) => {
   let [error, setError] = useState(null);
@@ -8,8 +9,10 @@ const FetchWords = (score) => {
     score: score,
   };
 
+  const server_url = process.env.SERVER_URL !== "http://localhost:5000";
+
   useEffect(() => {
-    fetch("https://capable-pithivier-ac7f7e.netlify.app/api/rank", {
+    fetch(server_url + "/api/rank", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
